@@ -3,7 +3,7 @@ package packaging
 import (
 	"bytes"
 	"fmt"
-	"github.com/niuhuan/stable-hover/internal/pubspec"
+	"github.com/niuhuan/hover/internal/pubspec"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -14,10 +14,10 @@ import (
 
 	"github.com/otiai10/copy"
 
-	"github.com/niuhuan/stable-hover/internal/build"
-	"github.com/niuhuan/stable-hover/internal/config"
-	"github.com/niuhuan/stable-hover/internal/fileutils"
-	"github.com/niuhuan/stable-hover/internal/log"
+	"github.com/niuhuan/hover/internal/build"
+	"github.com/niuhuan/hover/internal/config"
+	"github.com/niuhuan/hover/internal/fileutils"
+	"github.com/niuhuan/hover/internal/log"
 )
 
 var packagingPath = filepath.Join(build.BuildPath, "packaging")

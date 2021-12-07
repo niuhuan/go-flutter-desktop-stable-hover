@@ -5,8 +5,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/niuhuan/stable-hover/internal/build"
-	"github.com/niuhuan/stable-hover/internal/log"
+	"github.com/niuhuan/hover/internal/build"
+	"github.com/niuhuan/hover/internal/log"
 )
 
 var hoverYaml string

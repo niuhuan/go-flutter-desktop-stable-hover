@@ -11,11 +11,11 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/niuhuan/stable-hover/cmd/packaging"
-	"github.com/niuhuan/stable-hover/internal/build"
-	"github.com/niuhuan/stable-hover/internal/config"
-	"github.com/niuhuan/stable-hover/internal/log"
-	"github.com/niuhuan/stable-hover/internal/pubspec"
+	"github.com/niuhuan/hover/cmd/packaging"
+	"github.com/niuhuan/hover/internal/build"
+	"github.com/niuhuan/hover/internal/config"
+	"github.com/niuhuan/hover/internal/log"
+	"github.com/niuhuan/hover/internal/pubspec"
 )
 
 var (

@@ -6,7 +6,7 @@ import (
 	"sync"
 
 	rice "github.com/GeertJohan/go.rice"
-	"github.com/niuhuan/stable-hover/internal/log"
+	"github.com/niuhuan/hover/internal/log"
 )
 
 var (

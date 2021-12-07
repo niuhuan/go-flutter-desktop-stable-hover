@@ -18,11 +18,11 @@ import (
 	"golang.org/x/mod/modfile"
 	"gopkg.in/yaml.v2"
 
-	"github.com/niuhuan/stable-hover/internal/build"
-	"github.com/niuhuan/stable-hover/internal/fileutils"
-	"github.com/niuhuan/stable-hover/internal/log"
-	"github.com/niuhuan/stable-hover/internal/modx"
-	"github.com/niuhuan/stable-hover/internal/pubspec"
+	"github.com/niuhuan/hover/internal/build"
+	"github.com/niuhuan/hover/internal/fileutils"
+	"github.com/niuhuan/hover/internal/log"
+	"github.com/niuhuan/hover/internal/modx"
+	"github.com/niuhuan/hover/internal/pubspec"
 )
 
 const standaloneImplementationListAPI = "https://raw.githubusercontent.com/go-flutter-desktop/plugins/master/list.json"

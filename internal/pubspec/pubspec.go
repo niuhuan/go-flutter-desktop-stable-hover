@@ -2,13 +2,13 @@ package pubspec
 
 import (
 	"fmt"
-	"github.com/niuhuan/stable-hover/internal/config"
+	"github.com/niuhuan/hover/internal/config"
 	"os"
 	"os/user"
 
 	"gopkg.in/yaml.v2"
 
-	"github.com/niuhuan/stable-hover/internal/log"
+	"github.com/niuhuan/hover/internal/log"
 	"github.com/pkg/errors"
 )
 

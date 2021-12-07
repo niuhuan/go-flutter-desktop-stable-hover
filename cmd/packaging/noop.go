@@ -1,6 +1,6 @@
 package packaging
 
-import "github.com/niuhuan/stable-hover/internal/build"
+import "github.com/niuhuan/hover/internal/build"
 
 type noopTask struct{}
 

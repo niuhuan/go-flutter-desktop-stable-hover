@@ -1,6 +1,6 @@
 package packaging
 
-import "github.com/niuhuan/stable-hover/internal/build"
+import "github.com/niuhuan/hover/internal/build"
 
 // Task contains all configuration options for a given packaging method.
 // TODO: Rename to something that suits it more? Mabe Executor?

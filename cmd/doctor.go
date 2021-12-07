@@ -13,11 +13,11 @@ import (
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"
 
-	"github.com/niuhuan/stable-hover/cmd/packaging"
-	"github.com/niuhuan/stable-hover/internal/build"
-	"github.com/niuhuan/stable-hover/internal/config"
-	"github.com/niuhuan/stable-hover/internal/log"
-	"github.com/niuhuan/stable-hover/internal/version"
+	"github.com/niuhuan/hover/cmd/packaging"
+	"github.com/niuhuan/hover/internal/build"
+	"github.com/niuhuan/hover/internal/config"
+	"github.com/niuhuan/hover/internal/log"
+	"github.com/niuhuan/hover/internal/version"
 )
 
 func init() {

@@ -12,16 +12,16 @@ import (
 	"github.com/otiai10/copy"
 	"github.com/spf13/cobra"
 
-	"github.com/niuhuan/stable-hover/cmd/packaging"
-	"github.com/niuhuan/stable-hover/internal/build"
-	"github.com/niuhuan/stable-hover/internal/config"
-	"github.com/niuhuan/stable-hover/internal/darwinhacks"
-	"github.com/niuhuan/stable-hover/internal/enginecache"
-	"github.com/niuhuan/stable-hover/internal/fileutils"
-	"github.com/niuhuan/stable-hover/internal/log"
-	"github.com/niuhuan/stable-hover/internal/pubspec"
-	internalVersion "github.com/niuhuan/stable-hover/internal/version"
-	"github.com/niuhuan/stable-hover/internal/versioncheck"
+	"github.com/niuhuan/hover/cmd/packaging"
+	"github.com/niuhuan/hover/internal/build"
+	"github.com/niuhuan/hover/internal/config"
+	"github.com/niuhuan/hover/internal/darwinhacks"
+	"github.com/niuhuan/hover/internal/enginecache"
+	"github.com/niuhuan/hover/internal/fileutils"
+	"github.com/niuhuan/hover/internal/log"
+	"github.com/niuhuan/hover/internal/pubspec"
+	internalVersion "github.com/niuhuan/hover/internal/version"
+	"github.com/niuhuan/hover/internal/versioncheck"
 )
 
 var dotSlash = string([]byte{'.', filepath.Separator})

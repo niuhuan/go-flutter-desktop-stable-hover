@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/niuhuan/stable-hover/cmd"
+	"github.com/niuhuan/hover/cmd"
 )
 
 func main() {

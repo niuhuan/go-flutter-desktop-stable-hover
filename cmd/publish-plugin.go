@@ -10,9 +10,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/niuhuan/stable-hover/internal/build"
-	"github.com/niuhuan/stable-hover/internal/log"
-	"github.com/niuhuan/stable-hover/internal/pubspec"
+	"github.com/niuhuan/hover/internal/build"
+	"github.com/niuhuan/hover/internal/log"
+	"github.com/niuhuan/hover/internal/pubspec"
 	"github.com/spf13/cobra"
 )
 

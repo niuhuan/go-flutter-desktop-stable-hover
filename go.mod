@@ -1,4 +1,4 @@
-module github.com/niuhuan/stable-hover
+module github.com/niuhuan/hover
 
 go 1.13
 

@@ -18,10 +18,10 @@ import (
 	"github.com/otiai10/copy"
 	"github.com/pkg/errors"
 
-	"github.com/niuhuan/stable-hover/internal/build"
-	"github.com/niuhuan/stable-hover/internal/darwinhacks"
-	"github.com/niuhuan/stable-hover/internal/log"
-	"github.com/niuhuan/stable-hover/internal/version"
+	"github.com/niuhuan/hover/internal/build"
+	"github.com/niuhuan/hover/internal/darwinhacks"
+	"github.com/niuhuan/hover/internal/log"
+	"github.com/niuhuan/hover/internal/version"
 )
 
 func createSymLink(oldname, newname string) error {

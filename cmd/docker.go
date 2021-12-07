@@ -9,11 +9,11 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/niuhuan/stable-hover/cmd/packaging"
-	"github.com/niuhuan/stable-hover/internal/build"
-	"github.com/niuhuan/stable-hover/internal/log"
-	"github.com/niuhuan/stable-hover/internal/logstreamer"
-	"github.com/niuhuan/stable-hover/internal/version"
+	"github.com/niuhuan/hover/cmd/packaging"
+	"github.com/niuhuan/hover/internal/build"
+	"github.com/niuhuan/hover/internal/log"
+	"github.com/niuhuan/hover/internal/logstreamer"
+	"github.com/niuhuan/hover/internal/version"
 )
 
 func dockerHoverBuild(targetOS string, packagingTask packaging.Task, buildFlags []string, vmArguments []string) {

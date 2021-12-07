@@ -8,8 +8,8 @@ import (
 	"runtime/debug"
 	"sync"
 
-	"github.com/niuhuan/stable-hover/internal/build"
-	"github.com/niuhuan/stable-hover/internal/log"
+	"github.com/niuhuan/hover/internal/build"
+	"github.com/niuhuan/hover/internal/log"
 )
 
 // FlutterRequiredEngineVersion returns the commit hash of the engine in use

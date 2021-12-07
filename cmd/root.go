@@ -5,7 +5,7 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/niuhuan/stable-hover/internal/log"
+	"github.com/niuhuan/hover/internal/log"
 	"github.com/spf13/cobra"
 )
 

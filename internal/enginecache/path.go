@@ -3,7 +3,7 @@ package enginecache
 import (
 	"os"
 
-	"github.com/niuhuan/stable-hover/internal/log"
+	"github.com/niuhuan/hover/internal/log"
 )
 
 // DefaultCachePath tries to resolve the user cache directory. DefaultCachePath

@@ -8,10 +8,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/niuhuan/stable-hover/internal/build"
-	"github.com/niuhuan/stable-hover/internal/enginecache"
-	"github.com/niuhuan/stable-hover/internal/log"
-	"github.com/niuhuan/stable-hover/internal/versioncheck"
+	"github.com/niuhuan/hover/internal/build"
+	"github.com/niuhuan/hover/internal/enginecache"
+	"github.com/niuhuan/hover/internal/log"
+	"github.com/niuhuan/hover/internal/versioncheck"
 )
 
 func init() {

@@ -5,7 +5,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/niuhuan/stable-hover/internal/version"
+	"github.com/niuhuan/hover/internal/version"
 )
 
 func init() {
