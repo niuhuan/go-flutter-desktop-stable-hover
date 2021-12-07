@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/go-flutter-desktop/hover/internal/log"
+	"github.com/niuhuan/stable-hover/internal/log"
 )
 
 // AndroidManifest is a file that describes the essential information about

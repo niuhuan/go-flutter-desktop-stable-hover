@@ -12,16 +12,16 @@ import (
 	"github.com/otiai10/copy"
 	"github.com/spf13/cobra"
 
-	"github.com/go-flutter-desktop/hover/cmd/packaging"
-	"github.com/go-flutter-desktop/hover/internal/build"
-	"github.com/go-flutter-desktop/hover/internal/config"
-	"github.com/go-flutter-desktop/hover/internal/darwinhacks"
-	"github.com/go-flutter-desktop/hover/internal/enginecache"
-	"github.com/go-flutter-desktop/hover/internal/fileutils"
-	"github.com/go-flutter-desktop/hover/internal/log"
-	"github.com/go-flutter-desktop/hover/internal/pubspec"
-	internalVersion "github.com/go-flutter-desktop/hover/internal/version"
-	"github.com/go-flutter-desktop/hover/internal/versioncheck"
+	"github.com/niuhuan/stable-hover/cmd/packaging"
+	"github.com/niuhuan/stable-hover/internal/build"
+	"github.com/niuhuan/stable-hover/internal/config"
+	"github.com/niuhuan/stable-hover/internal/darwinhacks"
+	"github.com/niuhuan/stable-hover/internal/enginecache"
+	"github.com/niuhuan/stable-hover/internal/fileutils"
+	"github.com/niuhuan/stable-hover/internal/log"
+	"github.com/niuhuan/stable-hover/internal/pubspec"
+	internalVersion "github.com/niuhuan/stable-hover/internal/version"
+	"github.com/niuhuan/stable-hover/internal/versioncheck"
 )
 
 var dotSlash = string([]byte{'.', filepath.Separator})

@@ -13,11 +13,11 @@ import (
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"
 
-	"github.com/go-flutter-desktop/hover/cmd/packaging"
-	"github.com/go-flutter-desktop/hover/internal/build"
-	"github.com/go-flutter-desktop/hover/internal/config"
-	"github.com/go-flutter-desktop/hover/internal/log"
-	"github.com/go-flutter-desktop/hover/internal/version"
+	"github.com/niuhuan/stable-hover/cmd/packaging"
+	"github.com/niuhuan/stable-hover/internal/build"
+	"github.com/niuhuan/stable-hover/internal/config"
+	"github.com/niuhuan/stable-hover/internal/log"
+	"github.com/niuhuan/stable-hover/internal/version"
 )
 
 func init() {

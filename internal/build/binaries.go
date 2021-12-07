@@ -5,7 +5,7 @@ import (
 	"os/exec"
 	"sync"
 
-	"github.com/go-flutter-desktop/hover/internal/log"
+	"github.com/niuhuan/stable-hover/internal/log"
 )
 
 type binLookup struct {

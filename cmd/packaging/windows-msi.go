@@ -15,7 +15,7 @@ import (
 	ico "github.com/Kodeworks/golang-image-ico"
 	"github.com/google/uuid"
 
-	"github.com/go-flutter-desktop/hover/internal/log"
+	"github.com/niuhuan/stable-hover/internal/log"
 )
 
 var directoriesFileContent []string

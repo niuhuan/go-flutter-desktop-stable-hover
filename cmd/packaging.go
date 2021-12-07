@@ -3,7 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/go-flutter-desktop/hover/cmd/packaging"
+	"github.com/niuhuan/stable-hover/cmd/packaging"
 )
 
 func init() {

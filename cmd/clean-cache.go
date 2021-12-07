@@ -6,8 +6,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/go-flutter-desktop/hover/internal/enginecache"
-	"github.com/go-flutter-desktop/hover/internal/log"
+	"github.com/niuhuan/stable-hover/internal/enginecache"
+	"github.com/niuhuan/stable-hover/internal/log"
 )
 
 var cachePath string

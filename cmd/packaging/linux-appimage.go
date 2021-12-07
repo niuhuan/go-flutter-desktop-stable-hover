@@ -9,7 +9,7 @@ import (
 
 	copy "github.com/otiai10/copy"
 
-	"github.com/go-flutter-desktop/hover/internal/log"
+	"github.com/niuhuan/stable-hover/internal/log"
 )
 
 // LinuxAppImageTask packaging for linux as AppImage

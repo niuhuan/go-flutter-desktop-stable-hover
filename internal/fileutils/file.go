@@ -13,7 +13,7 @@ import (
 
 	rice "github.com/GeertJohan/go.rice"
 
-	"github.com/go-flutter-desktop/hover/internal/log"
+	"github.com/niuhuan/stable-hover/internal/log"
 )
 
 // IsFileExists checks if a file exists and is not a directory

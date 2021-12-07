@@ -9,7 +9,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/go-flutter-desktop/hover/internal/log"
+	"github.com/niuhuan/stable-hover/internal/log"
 )
 
 // DyldHack is a nasty hack to get the linking working. After fiddling a lot of hours with CGO linking

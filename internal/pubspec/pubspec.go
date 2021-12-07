@@ -2,13 +2,13 @@ package pubspec
 
 import (
 	"fmt"
-	"github.com/go-flutter-desktop/hover/internal/config"
+	"github.com/niuhuan/stable-hover/internal/config"
 	"os"
 	"os/user"
 
 	"gopkg.in/yaml.v2"
 
-	"github.com/go-flutter-desktop/hover/internal/log"
+	"github.com/niuhuan/stable-hover/internal/log"
 	"github.com/pkg/errors"
 )
 

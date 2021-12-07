@@ -14,9 +14,9 @@ import (
 	"golang.org/x/mod/modfile"
 	"golang.org/x/mod/module"
 
-	"github.com/go-flutter-desktop/hover/internal/fileutils"
-	"github.com/go-flutter-desktop/hover/internal/log"
-	"github.com/go-flutter-desktop/hover/internal/modx"
+	"github.com/niuhuan/stable-hover/internal/fileutils"
+	"github.com/niuhuan/stable-hover/internal/log"
+	"github.com/niuhuan/stable-hover/internal/modx"
 )
 
 func hasUpdate(timestampDir, currentVersion, repo string) (bool, string) {

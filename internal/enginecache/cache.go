@@ -6,6 +6,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	url2 "net/url"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -17,10 +18,10 @@ import (
 	"github.com/otiai10/copy"
 	"github.com/pkg/errors"
 
-	"github.com/go-flutter-desktop/hover/internal/build"
-	"github.com/go-flutter-desktop/hover/internal/darwinhacks"
-	"github.com/go-flutter-desktop/hover/internal/log"
-	"github.com/go-flutter-desktop/hover/internal/version"
+	"github.com/niuhuan/stable-hover/internal/build"
+	"github.com/niuhuan/stable-hover/internal/darwinhacks"
+	"github.com/niuhuan/stable-hover/internal/log"
+	"github.com/niuhuan/stable-hover/internal/version"
 )
 
 func createSymLink(oldname, newname string) error {
@@ -139,8 +140,23 @@ func downloadFile(filepath string, url string) error {
 	}
 	defer out.Close()
 
+	client := http.Client{}
+	var proxyUrl string
+	if os.Getenv("ALL_PROXY") != "" {
+		proxyUrl = os.Getenv("ALL_PROXY")
+	} else if os.Getenv("all_proxy") != "" {
+		proxyUrl = os.Getenv("all_proxy")
+	}
+	if proxyUrl != "" {
+		client.Transport = &http.Transport{
+			Proxy: func(*http.Request) (*url2.URL, error) {
+				return url2.Parse(proxyUrl)
+			},
+		}
+	}
+
 	// Get the data
-	resp, err := http.Get(url)
+	resp, err := client.Get(url)
 	if err != nil {
 		return err
 	}
@@ -309,14 +325,16 @@ func ValidateOrUpdateEngine(targetOS, cachePath, requiredEngineVersion string, m
 			file += "windows"
 		}
 		file += fmt.Sprintf("_x64-host_%s.zip", mode.Name)
-		engineDownloadURL := fmt.Sprintf("https://github.com/go-flutter-desktop/engine-builds/releases/download/f-%s/%s", requiredEngineVersion, file)
-
+		engineDownloadURL := fmt.Sprintf("https://github.com/niuhuan/stable-engine-builds/releases/download/f-%s/%s", requiredEngineVersion, file)
+		if "true" == os.Getenv("GHPROXY") {
+			engineDownloadURL = "https://ghproxy.com/" + engineDownloadURL
+		}
 		err = downloadFile(engineZipPath, engineDownloadURL)
 		if err != nil {
 			log.Errorf("Failed to download engine: %v", err)
 			log.Errorf("Engine builds are a bit delayed after they are published in flutter.")
 			log.Errorf("You can either try again later or switch the flutter channel to beta, because these engines are more likely to be already built.")
-			log.Errorf("To dig into the already built engines look at https://github.com/go-flutter-desktop/engine-builds/releases and https://github.com/go-flutter-desktop/engine-builds/actions")
+			log.Errorf("To dig into the already built engines look at https://github.com/niuhuan/stable-engine-builds/releases and https://github.com/go-flutter-desktop/engine-builds/actions")
 			os.Exit(1)
 		}
 		_, err = unzip(engineZipPath, engineExtractPath)

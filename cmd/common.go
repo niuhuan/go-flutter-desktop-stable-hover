@@ -13,10 +13,10 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/go-flutter-desktop/hover/internal/build"
-	"github.com/go-flutter-desktop/hover/internal/log"
-	"github.com/go-flutter-desktop/hover/internal/pubspec"
-	"github.com/go-flutter-desktop/hover/internal/version"
+	"github.com/niuhuan/stable-hover/internal/build"
+	"github.com/niuhuan/stable-hover/internal/log"
+	"github.com/niuhuan/stable-hover/internal/pubspec"
+	"github.com/niuhuan/stable-hover/internal/version"
 )
 
 // assertInFlutterProject asserts this command is executed in a flutter project

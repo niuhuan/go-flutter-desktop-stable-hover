@@ -10,9 +10,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/go-flutter-desktop/hover/internal/build"
-	"github.com/go-flutter-desktop/hover/internal/log"
-	"github.com/go-flutter-desktop/hover/internal/pubspec"
+	"github.com/niuhuan/stable-hover/internal/build"
+	"github.com/niuhuan/stable-hover/internal/log"
+	"github.com/niuhuan/stable-hover/internal/pubspec"
 	"github.com/spf13/cobra"
 )
 
