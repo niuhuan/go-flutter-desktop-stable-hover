@@ -1,15 +1,19 @@
 FROM snapcore/snapcraft AS snapcraft
 # Using multi-stage dockerfile to obtain snapcraft binary
 
-FROM ubuntu:groovy AS flutterbuilder
+FROM ubuntu:20.04 AS ubuntuna
+ADD source.list /etc/apt/sources.list
+
+FROM ubuntuna AS flutterbuilder
 RUN apt-get update \
     && apt-get install -y \
         git curl unzip
 # Install Flutter from the beta channel
-RUN git clone --single-branch --depth=1 --branch beta https://github.com/flutter/flutter /opt/flutter 2>&1 \
-    && /opt/flutter/bin/flutter doctor -v
+RUN git clone --single-branch --depth=1 --branch stable https://mirrors.tuna.tsinghua.edu.cn/git/flutter-sdk.git  /opt/flutter
+RUN /opt/flutter/bin/flutter doctor -v
 
-FROM ubuntu:groovy AS xarbuilder
+FROM ubuntuna AS xarbuilder
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
 	&& apt-get install -y \
 		git libssl-dev libxml2-dev make g++ autoconf zlib1g-dev
@@ -22,7 +26,7 @@ RUN git clone --single-branch --depth=1 --branch xar-1.6.1 https://github.com/ma
 	&& make 2>&1 \
 	&& make install 2>&1
 
-FROM ubuntu:groovy AS bomutilsbuilder
+FROM ubuntuna AS bomutilsbuilder
 RUN apt-get update \
 	&& apt-get install -y \
 	    git make g++
@@ -32,19 +36,19 @@ RUN git clone --single-branch --depth=1 --branch 0.2 https://github.com/hogliux/
 	&& make install 2>&1
 
 # Fixed using https://github.com/AppImage/AppImageKit/issues/828
-FROM ubuntu:groovy as appimagebuilder
+FROM ubuntuna as appimagebuilder
 RUN apt-get update \
 	&& apt-get install -y \
 	    curl
 RUN cd /opt \
-	&& curl -LO https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage \
+	&& curl -LO https://www.ghproxy.com/https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage \
 	&& chmod a+x appimagetool-x86_64.AppImage \
 	&& sed 's|AI\x02|\x00\x00\x00|g' -i appimagetool-x86_64.AppImage \
 	&& ./appimagetool-x86_64.AppImage --appimage-extract \
 	&& mv squashfs-root appimagetool
 
 # groovy ships with a too old meson version
-FROM ubuntu:groovy AS pacmanbuilder
+FROM ubuntuna AS pacmanbuilder
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get install -y \
@@ -114,6 +118,8 @@ COPY --from=flutterbuilder /opt/flutter /opt/flutter
 RUN ln -sf /opt/flutter/bin/flutter /usr/bin/flutter
 
 # Build hover
+ENV GO111MODULE=on
+ENV GOPROXY=https://goproxy.cn,direct
 WORKDIR /go/src/app
 COPY . .
 RUN go get -d -v ./... 2>&1
