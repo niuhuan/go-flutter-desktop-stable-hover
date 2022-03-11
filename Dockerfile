@@ -1,7 +1,7 @@
-FROM snapcore/snapcraft AS snapcraft
-# Using multi-stage dockerfile to obtain snapcraft binary
 
-FROM ubuntu:focal AS flutterbuilder
+FROM ubuntu:20.04 AS generalenv
+
+FROM generalenv AS flutterbuilder
 RUN apt-get update \
     && apt-get install -y \
         git curl unzip
@@ -9,7 +9,7 @@ RUN apt-get update \
 RUN git clone --single-branch --depth=1 --branch beta https://github.com/flutter/flutter /opt/flutter 2>&1 \
     && /opt/flutter/bin/flutter doctor -v
 
-FROM ubuntu:focal AS xarbuilder
+FROM generalenv AS xarbuilder
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
 	&& apt-get install -y \
@@ -23,7 +23,8 @@ RUN git clone --single-branch --depth=1 --branch xar-1.6.1 https://github.com/ma
 	&& make 2>&1 \
 	&& make install 2>&1
 
-FROM ubuntu:focal AS bomutilsbuilder
+
+FROM generalenv AS bomutilsbuilder
 RUN apt-get update \
 	&& apt-get install -y \
 	    git make g++
@@ -32,8 +33,9 @@ RUN git clone --single-branch --depth=1 --branch 0.2 https://github.com/hogliux/
 	&& make 2>&1 \
 	&& make install 2>&1
 
+
 # Fixed using https://github.com/AppImage/AppImageKit/issues/828
-FROM ubuntu:focal as appimagebuilder
+FROM generalenv as appimagebuilder
 RUN apt-get update \
 	&& apt-get install -y \
 	    curl
@@ -44,8 +46,8 @@ RUN cd /opt \
 	&& ./appimagetool-x86_64.AppImage --appimage-extract \
 	&& mv squashfs-root appimagetool
 
-# groovy ships with a too old meson version
-FROM ubuntu:focal AS pacmanbuilder
+
+FROM generalenv AS pacmanbuilder
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get install -y \
@@ -56,12 +58,16 @@ RUN cd /tmp \
     && meson setup builddir \
     && meson install -C builddir
 
-FROM symfonycorp/golang-cross:1.16.3 AS hover
+FROM snapcore/snapcraft AS snapcraft
 
-# Install dependencies via apt
-RUN dpkg --add-architecture i386
-RUN apt-get update \
-	&& apt-get install -y \
+FROM golang:1.17.8-buster
+RUN dpkg --add-architecture i386 \
+    && apt-get update \
+    && apt-get install -y \
+        autoconf automake bc python binfmt-support binutils-multiarch \
+        build-essential clang devscripts libtool llvm multistrap patch mercurial musl-tools \
+        mingw-w64 wine32 wine64\
+        autotools-dev libxml2-dev lzma-dev libssl-dev zlib1g-dev libmpc-dev libmpfr-dev libgmp-dev llvm-dev uuid-dev \
 	    # dependencies for compiling linux
 		libgl1-mesa-dev xorg-dev \
 		# dependencies for compiling windows
@@ -76,7 +82,6 @@ RUN apt-get update \
 		fakeroot bsdtar \
 		# dependencies for windows-msi
 		wixl imagemagick \
-        wine32 \
 	&& rm -rf /var/lib/apt/lists/*
 
 COPY --from=snapcraft /snap /snap
