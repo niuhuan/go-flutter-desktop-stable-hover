@@ -1,3 +1,9 @@
+ARG GO_VERSION=1.17.8
+ARG OSX_SDK=MacOSX11.3.sdk
+ARG OSX_VERSION_MIN=10.12
+ARG OSX_CROSS_COMMIT=be2b79f444aa0b43b8695a4fb7b920bf49ecc01c
+ARG LIBTOOL_VERSION=2.4.6
+ARG OSX_CODENAME=sierra
 
 FROM ubuntu:20.04 AS generalenv
 
@@ -60,13 +66,64 @@ RUN cd /tmp \
 
 FROM snapcore/snapcraft AS snapcraft
 
-FROM golang:1.17.8-buster
+
+FROM golang:${GO_VERSION}-buster as base
+ENV OSX_CROSS_PATH=/osxcross
+
+
+FROM base AS osx-sdk
+ARG OSX_SDK
+ARG OSX_SDK_SUM
+ADD https://github.com/niuhuan/packaged_macosx_sdk/releases/download/${OSX_SDK}/${OSX_SDK}.tar.xz "${OSX_CROSS_PATH}/tarballs/${OSX_SDK}.tar.xz"
+
+
+FROM base AS osx-cross-base
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y -q --no-install-recommends \
+    clang \
+    file \
+    llvm \
+    patch \
+    xz-utils \
+    cmake \
+    libxml2-dev \
+    libssl-dev \
+    zlib1g-dev \
+    libmpc-dev \
+    libmpfr-dev \
+    libgmp-dev \
+ && rm -rf /var/lib/apt/lists/*
+
+
+FROM osx-cross-base AS osx-cross
+ARG OSX_CROSS_COMMIT
+WORKDIR "${OSX_CROSS_PATH}"
+RUN git clone https://github.com/tpoechtrager/osxcross.git . \
+ && git checkout -q "${OSX_CROSS_COMMIT}" \
+ && rm -rf ./.git
+COPY --from=osx-sdk "${OSX_CROSS_PATH}/." "${OSX_CROSS_PATH}/"
+ARG OSX_VERSION_MIN
+RUN UNATTENDED=yes OSX_VERSION_MIN=${OSX_VERSION_MIN} ./build.sh
+
+
+FROM base AS libtool
+ARG LIBTOOL_VERSION
+ARG OSX_CODENAME
+ARG OSX_SDK
+ADD https://github.com/niuhuan/packaged_macosx_sdk/releases/download/libtool-${LIBTOOL_VERSION}/libtool-${LIBTOOL_VERSION}.tar.gz libtool-${LIBTOOL_VERSION}.tar.gz
+RUN mkdir -p "${OSX_CROSS_PATH}/target/SDK/${OSX_SDK}/usr/"
+RUN tar zxvf libtool-${LIBTOOL_VERSION}.tar.gz \
+		-C "${OSX_CROSS_PATH}/target/SDK/${OSX_SDK}/usr/"
+
+
+FROM osx-cross-base
 RUN dpkg --add-architecture i386 \
     && apt-get update \
     && apt-get install -y \
+        libltdl-dev parallel \
         autoconf automake bc python binfmt-support binutils-multiarch \
         build-essential clang devscripts libtool llvm multistrap patch mercurial musl-tools \
-        mingw-w64 wine32 wine64\
+        mingw-w64 wine32 wine64 \
         autotools-dev libxml2-dev lzma-dev libssl-dev zlib1g-dev libmpc-dev libmpfr-dev libgmp-dev llvm-dev uuid-dev \
 	    # dependencies for compiling linux
 		libgl1-mesa-dev xorg-dev \
@@ -83,6 +140,10 @@ RUN dpkg --add-architecture i386 \
 		# dependencies for windows-msi
 		wixl imagemagick \
 	&& rm -rf /var/lib/apt/lists/*
+
+COPY --from=osx-cross "${OSX_CROSS_PATH}/." "${OSX_CROSS_PATH}/"
+COPY --from=libtool   "${OSX_CROSS_PATH}/." "${OSX_CROSS_PATH}/"
+ENV PATH=${OSX_CROSS_PATH}/target/bin:$PATH
 
 COPY --from=snapcraft /snap /snap
 ENV PATH="/snap/bin:$PATH"
