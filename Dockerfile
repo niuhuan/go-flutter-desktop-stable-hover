@@ -59,9 +59,10 @@ RUN cd /tmp \
     && meson setup builddir \
     && meson install -C builddir
 
-FROM dockercore/golang-cross:1.13.15 AS hover
+FROM symfonycorp/golang-cross:1.16.3 AS hover
 
 # Install dependencies via apt
+RUN dpkg --add-architecture i386
 RUN apt-get update \
 	&& apt-get install -y \
 	    # dependencies for compiling linux
@@ -78,6 +79,7 @@ RUN apt-get update \
 		fakeroot bsdtar \
 		# dependencies for windows-msi
 		wixl imagemagick \
+        wine32 \
 	&& rm -rf /var/lib/apt/lists/*
 
 COPY --from=snapcraft /snap /snap
