@@ -2,7 +2,7 @@ FROM snapcore/snapcraft AS snapcraft
 # Using multi-stage dockerfile to obtain snapcraft binary
 
 FROM ubuntu:20.04 AS ubuntuna
-ADD source.list /etc/apt/sources.list
+ADD source.list.focal.txt /etc/apt/sources.list
 
 FROM ubuntuna AS flutterbuilder
 RUN apt-get update \
@@ -60,6 +60,7 @@ RUN cd /tmp \
     && meson install -C builddir
 
 FROM symfonycorp/golang-cross:1.16.3 AS hover
+ADD source.list.buster.txt /etc/apt/sources.list
 
 # Install dependencies via apt
 RUN dpkg --add-architecture i386
